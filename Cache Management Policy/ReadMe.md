@@ -1,8 +1,8 @@
-The Scripts are based on the Jython which we used to perform CRUD function in the KPS that can be used a distributed Cache in EMT and Classic solution.
+## The Scripts are based on the Jython which we used to perform CRUD function in the KPS that can be used a distributed Cache in EMT and Classic solution.
 
 Here are the details of the 5 API's :-
 
-1. Create new Record - This policy will create a new entry in the Cassandra cache table with a value of TTL (Time to live - till the time new entry will stay in the Cassandra cache table).
+### 1. Create new Record - This policy will create a new entry in the Cassandra cache table with a value of TTL (Time to live - till the time new entry will stay in the Cassandra cache table).
 
  
 
@@ -30,19 +30,15 @@ try:
 recordhash = Table.createRecord("cache", recordhash, TTL)
 
 except ObjectExists:
-#exception can occur due to the presence of same data already in the cache table or cassandra is not available or some required attribute is not provided in query parameter
+
 return False
 return True
 
 ========================================================================================
 
-                               
-
  
 
- 
-
-2. Delete a record -  This policy is to delete a Cassandra entry.
+### 2. Delete a record -  This policy is to delete a Cassandra entry.
 
  
 
@@ -62,7 +58,7 @@ try:
 record = Table.deleteRecord("cache", data)
 
 except ObjectNotFound:
-# Handle case when an object with the given primary key does not exists
+
 return False
 return True
 
@@ -70,7 +66,7 @@ return True
 
  
 
-3. Extend TTL for a record - This policy is to update the TTL value of a entry that already exist in the Cassandra cache table.
+### 3. Extend TTL for a record - This policy is to update the TTL value of a entry that already exist in the Cassandra cache table.
 
  
 
@@ -90,13 +86,13 @@ data = msg.get("data")
 TTL = int (msg.get("TTL"))
 record = HashMap()
 record.put("id", data)
-# Repeat next line for each of the properties to update, note that if TTL is non-zero then, all properties must be set
+
 record.put("data", data)
 
 try:
 record = Table.readRecord("cache", data)
 Table.updateRecord("cache", record, TTL)
-# The record TTL is now extend to the new value
+
 
 except ObjectNotFound:
 return False
@@ -108,7 +104,7 @@ return True
 
  
 
-4. Read a record - This policy is to check if any entry exist in the Cassandra cache table.
+### 4. Read a record - This policy is to check if any entry exist in the Cassandra cache table.
 
  
 
@@ -128,7 +124,7 @@ try:
 record = Table.readRecord("cache", data)
 
 except ObjectNotFound:
-# Handle case when an object with the given primary key does not exists
+
 return False
 return True
 
@@ -158,18 +154,18 @@ TTL = int(msg.get("TTL"))
 updated = msg.get("update")
 record = HashMap()
 record.put("id", id)
-# Repeat next line for each of the properties to update, note that if TTL is non-zero then, all properties must be set
+
 record.put("data", data)
 
 try:
 record = Table.readRecord("cache", id)
-#check if the record is present by using its "id" or not
+
 
 record = Table.updateRecord("cache", record, TTL)
-# Note that, the updated record TTL has been reset to value used in the last parameter
+
 
 except ObjectNotFound:
-# Handle case when an object with the given primary key does not exists
+
 return False
 return True
 
