@@ -17,4 +17,4 @@ Goals :-
 We are trying to use these scripts with more complex user stories. 
 Note these could be used in Classic and EMT mode hence do not hesitate to use it. 
 
-[Axwaylogo]: https://github.com/Axway-API-Management/Common/blob/master/img/AxwayLogoSmall.png  "Axway logo"
+![Axwaylogo]( https://github.com/Axway-API-Management/Common/blob/master/img/AxwayLogoSmall.png ) "Axway logo"
