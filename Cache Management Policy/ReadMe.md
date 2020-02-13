@@ -21,9 +21,9 @@ def invoke(msg):
 data = msg.get("data")
 TTL = int (msg.get("TTL"))
 recordhash = HashMap()
-# If the primary key is auto-gererated then, the next line should be deleted
+
 recordhash.put("id", data)
-# Repeat next line for each of the non-auto-generated properties properties, note that if TTL is non-zero then, all non-auto-generated properties must be set
+
 recordhash.put("data", data)
 
 try:
@@ -132,7 +132,7 @@ return True
 
  
 
-5. Update a record - This policy is to update any one existing entry in the Cassandra cache table and then update it with the new record and TTL value's.
+### 5. Update a record - This policy is to update any one existing entry in the Cassandra cache table and then update it with the new record and TTL value's.
 
  
 
